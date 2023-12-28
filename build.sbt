@@ -1,25 +1,23 @@
 // See README.md for license details.
 
-ThisBuild / scalaVersion     := "2.13.12"
+ThisBuild / scalaVersion     := "2.12.15"
 ThisBuild / version          := "0.1.0"
-ThisBuild / organization     := "%ORGANIZATION%"
+ThisBuild / organization     := "dyf"
 
-val chiselVersion = "5.1.0"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "%NAME%",
+    name := "GCD",
     libraryDependencies ++= Seq(
-      "org.chipsalliance" %% "chisel" % chiselVersion,
-      "edu.berkeley.cs" %% "chiseltest" % "5.0.2" % "test"
+      "edu.berkeley.cs" %% "chisel3" % "3.5.4" ,
+      "edu.berkeley.cs" %% "chiseltest" % "0.5.4" % "test"
     ),
     scalacOptions ++= Seq(
       "-language:reflectiveCalls",
       "-deprecation",
       "-feature",
-      "-Xcheckinit",
-      "-Ymacro-annotations",
+      "-Xcheckinit"
     ),
-    addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % chiselVersion cross CrossVersion.full),
+    addCompilerPlugin("edu.berkeley.cs" % "chisel3-plugin" % "3.5.4" cross CrossVersion.full),
   )
 
