@@ -70,4 +70,5 @@ class DecoupledGcd(width: Int) extends Module {
       busy := true.B
     }
   }
+  assert(!(busy === false.B && output.valid === true.B))
 }

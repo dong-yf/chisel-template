@@ -31,4 +31,6 @@ class GCD extends Module {
 
   io.outputGCD := x
   io.outputValid := y === 0.U
+
+  assert(io.outputValid)
 }
