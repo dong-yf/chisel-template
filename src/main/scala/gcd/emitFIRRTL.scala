@@ -2,7 +2,7 @@ package gcd
 
 object emitFIRRTL extends App {
   (new chisel3.stage.ChiselStage()).emitFirrtl(
-    new gcd.DecoupledGcd(16),
+    new gcd.GCD(),
     Array("--target-dir", "generated")
   )
 }
