@@ -1,0 +1,10 @@
+[submodule "chisel"]
+	path = chisel
+	url = https://github.com/dong-yf/chisel.git
+[submodule "firrtl"]
+	path = firrtl
+	url = https://github.com/dong-yf/firrtl.git
+[submodule "chiseltest"]
+	path = chiseltest
+	url = https://github.com/dong-yf/chiseltest.git
+
