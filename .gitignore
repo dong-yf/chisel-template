@@ -346,3 +346,5 @@ metals.sbt
 generated/
 
 .DS_Store
+*.xlsx
+*.smt2
