@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class MulFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
     behavior of "Multiplier"
     it should "pass" in {
-        verify(new Mul(8), Seq(BoundedCheck(20), Z3EngineAnnotation))
+        verify(new Mul(32), Seq(BoundedCheck(40), Z3EngineAnnotation))
     }
 }

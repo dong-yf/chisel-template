@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class DividerFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
     behavior of "Divider"
     it should "pass" in {
-        verify(new Divider(), Seq(BoundedCheck(6), Z3EngineAnnotation))
+        verify(new Divider(), Seq(BoundedCheck(12), Z3EngineAnnotation))
     }
 }
