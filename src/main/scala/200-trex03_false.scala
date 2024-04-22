@@ -21,24 +21,26 @@ class Trex03 extends Module {
         val c1 = Input(Bool())
         val c2 = Input(Bool())
     })
-
+    val d1 = 1.U
+    val d2 = 1.U
+    val d3 = 1.U
     val regX1 = RegInit(io.x1)
     val regX2 = RegInit(io.x2)
     val regX3 = RegInit(io.x3)
-    // val count = RegInit(200.U(32.W))
+    val count = RegInit(200.U(32.W))
 
     when (regX1 > 0.U && regX2 > 0.U && regX3 > 0.U) {
         when (io.c1) {
-            regX1 := regX1 - 1.U
-        } .elsewhen (io.c2) {
-            regX2 := regX2 - 1.U
-        } .otherwise {
-            regX3 := regX3 - 1.U
+            regX1 := regX1 - d1
+        }.elsewhen (io.c2) {
+            regX2 := regX2 - d2
+        }.otherwise {
+            regX3 := regX3 - d3
         }
-        // count := count - 1.U
+        count := count - 1.U
     }
 
-    when (regX1 === 0.U || regX2 === 0.U || regX3 === 0.U) {
+    when(count === 0.U) {
         assert(regX1 === 0.U && regX2 === 0.U && regX3 === 0.U)
     }
     

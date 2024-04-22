@@ -103,7 +103,7 @@ class AXI42SimpleBusConverter() extends Module {
 
   when (axi.b.fire) {
     bresp_en := false.B
-    resetState()
+    // resetState()
   }
 
   // Arbitration
@@ -117,6 +117,9 @@ class AXI42SimpleBusConverter() extends Module {
   axi.w.ready  := isState(axi_write) && mem.req.ready
   axi.b.valid := bresp_en && mem.resp.valid
   axi.b.bits.resp := AXI4Parameters.RESP_OKAY
+
+  // val errCounter = RegInit(0.U(8.W))
+  // errorCounter := errorCounter + 1.U
 
   when (axi.ar.fire) { assert(mem.req.fire && !isInflight()); }
   when (axi.aw.fire) { assert(!isInflight()); }

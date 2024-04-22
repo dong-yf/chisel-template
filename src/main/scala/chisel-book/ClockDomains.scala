@@ -28,6 +28,7 @@ class SourceClock extends Module {
 class SinkClock extends Module {
   val io = IO(new Bundle() {
     val c = Flipped(new ClockChannel())
+    val in = Input(UInt(32.W))
     val errorCnt = Output(UInt(8.W))
   })
 
@@ -46,6 +47,10 @@ class SinkClock extends Module {
   }
 
   io.errorCnt := errCntReg
+  // assertion begin
+  when (expectedCntReg === 100.U) {
+    assert(expectedCntReg === errCntReg)
+  }
 }
 
 class ClockDomains extends Module {
