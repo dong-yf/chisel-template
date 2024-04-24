@@ -1,3 +1,5 @@
+package chiselbook
+
 import chisel3._
 
 class Timer extends Module {
@@ -24,4 +26,10 @@ class Timer extends Module {
   // printf("%d %d %d\n", next, reg, done)
 
   io.done := done
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when (count === 200.U) {
+    assert(io.done === true.B)
+  }
 }

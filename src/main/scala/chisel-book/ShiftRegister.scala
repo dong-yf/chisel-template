@@ -1,3 +1,5 @@
+package chiselbook
+
 import chisel3._
 import chisel3.util._
 
@@ -34,7 +36,7 @@ class ShiftRegister extends Module {
   val load = io.load
   //- start shift_paraload
   val loadReg = RegInit(0.U(4.W))
-  when (load) {
+  when (io.load) {
     loadReg := d
   } otherwise  {
     loadReg := 0.U ## loadReg(3, 1)
@@ -46,4 +48,11 @@ class ShiftRegister extends Module {
 
   io.paraOut := q
   io.dout := dout
+
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when (count === 200.U) {
+    assert(io.serOut === 1.U)
+  }
 }

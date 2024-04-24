@@ -47,17 +47,17 @@ class PopCountFSM extends Module {
 //- start popcnt_data
 class PopCountDataPath extends Module {
   val io = IO(new Bundle {
-    val din = Input(UInt(8.W))
+    val din = Input(UInt(64.W))
     val load = Input(Bool())
-    val popCnt = Output(UInt(4.W))
+    val popCnt = Output(UInt(32.W))
     val done = Output(Bool())
   })
 
-  val dataReg = RegInit(0.U(8.W))
-  val popCntReg = RegInit(0.U(8.W))
-  val counterReg= RegInit(0.U(4.W))
+  val dataReg = RegInit(0.U(64.W))
+  val popCntReg = RegInit(0.U(64.W))
+  val counterReg= RegInit(0.U(32.W))
 
-  dataReg := 0.U ## dataReg(7, 1)
+  dataReg := 0.U ## dataReg(63, 1)
   popCntReg := popCntReg + dataReg(0)
 
   val done = counterReg === 0.U
@@ -68,7 +68,7 @@ class PopCountDataPath extends Module {
   when(io.load) {
     dataReg := io.din
     popCntReg := 0.U
-    counterReg := 8.U
+    counterReg := 32.U
   }
 
   // debug output
@@ -84,10 +84,10 @@ class PopulationCount extends Module {
   val io = IO(new Bundle {
     val dinValid = Input(Bool())
     val dinReady = Output(Bool())
-    val din = Input(UInt(8.W))
+    val din = Input(UInt(64.W))
     val popCntValid = Output(Bool())
     val popCntReady = Input(Bool())
-    val popCnt = Output(UInt(4.W))
+    val popCnt = Output(UInt(32.W))
   })
 
 
@@ -103,6 +103,20 @@ class PopulationCount extends Module {
   io.popCnt := data.io.popCnt
   data.io.load := fsm.io.load
   fsm.io.done := data.io.done
+   
+  // assertion begin
+  
+  when(io.din === "hffffffffffffffff".U && io.dinValid) {
+    when(io.popCntValid) {
+      assert(io.popCnt === 30.U)
+    }
+  }
+  // val count = RegInit(30.U(32.W))
+  // count := count - 1.U
+  // when(count === 0.U) {
+  //   assert(io.popCnt === 3.U)
+  // }
+  
 }
 //- end
 // TODO: bulk connections should do the work.

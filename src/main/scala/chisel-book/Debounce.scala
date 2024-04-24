@@ -11,6 +11,9 @@ class Debounce(fac: Int = 10000/100) extends Module {
 
   val btn = io.btnU
 
+  // add count
+  val count = RegInit(0.U(8.W))
+
   //- start input_sync
   val btnSync = RegNext(RegNext(btn))
   //- end
@@ -59,10 +62,9 @@ class Debounce(fac: Int = 10000/100) extends Module {
   io.led := reg
 
   // add assertion begin
-  when (tick) {
-    when(io.btnU === false.B) {
-      assert(io.led === 1.U)
-    }
+  count := count + 1.U
+  when (count === 100.U) {
+    assert(reg === 2.U)
   }
 
 }

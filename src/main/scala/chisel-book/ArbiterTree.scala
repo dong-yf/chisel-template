@@ -103,13 +103,24 @@ class ArbiterSimpleTree[T <: Data: Manifest](n: Int, private val gen: T) extends
       regEmpty := true.B
     }
 
+    // assertion begin
+    when (count === 200.U) {
+      assert(regReadyB === regReadyA)
+    }
+    // assertion end
+
     out.bits := regData
     out
   }
   //- end
 
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+
   //- start fun_arbiter_end
   io.out <> io.in.reduceTree((a, b) => arbitrateSimp(a, b))
+
 }
 //- end
 

@@ -1,3 +1,5 @@
+package chiselbook
+
 import chisel3._
 import chisel3.util._
 
@@ -18,8 +20,8 @@ class Pwm extends Module {
   //- end
 
   //- start pwm_modulate
-  val FREQ = 100000000 // a 100 MHz clock input
-  val MAX = FREQ/1000  // 1 kHz
+  val FREQ = 1000 // a 100 MHz clock input
+  val MAX = FREQ/10  // 1 kHz
 
   val modulationReg = RegInit(0.U(32.W))
 
@@ -36,13 +38,20 @@ class Pwm extends Module {
   }
 
   // divide modReg by 1024 (about the 1 kHz)
-  val sig = pwm(MAX, modulationReg >> 10)
+  val sig = pwm(MAX, modulationReg)
   //- end
 
 
   io.led := Cat(0.U, sig, dout)
+
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when (count === 200.U) {
+    assert(sig === 1.U)
+  }
 }
 
-object Pwm extends App {
-  emitVerilog(new Pwm())
-}
+// object Pwm extends App {
+//   emitVerilog(new Pwm())
+// }
