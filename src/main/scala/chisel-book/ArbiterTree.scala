@@ -104,7 +104,7 @@ class ArbiterSimpleTree[T <: Data: Manifest](n: Int, private val gen: T) extends
     }
 
     // assertion begin
-    when (count === 200.U) {
+    when (count === 400.U) {
       assert(regReadyB === regReadyA)
     }
     // assertion end
