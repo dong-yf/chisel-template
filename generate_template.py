@@ -41,26 +41,29 @@ def add_when(inputs):
     for idx, input_name in enumerate(inputs):
         when_code += f"   when(io.{input_name}) {{\n"
         r = random.randint(1, 30)
-        if idx == len(inputs) - 1:
-            when_code += f"     w := {r}.U\n"
-        else:
-            when_code += f"     w := w + {r}.U\n"
-        # when_code += add_statement()
+        # if idx == len(inputs) - 1:
+        #     when_code += f"     w := {r}.U\n"
+        # else:
+        #     when_code += f"     w := w + {r}.U\n"
+        when_code += add_statement()
         when_code += f"   }}\n"
     return when_code
 
 def add_statement():
-    r1 = random.randint(0, 1)
+    r1 = random.randint(0, 2)
     r2 = random.randint(1, 10)
     if r1 == 0:
-        return f"  w := w + {r2}.U\n"
+        return f"     w := w + {r2}.U\n"
+    elif r1 == 1:
+        return f"     w := w - {r2}.U\n"
     else:
-        return f"  w := {r2}.U\n"
+        return f"     w := {r2}.U\n"
 
 def add_assertion():
+    r = random.randint(1, 10)
     assertion = ""
     assertion += "  when (count === 0.U) {\n"
-    assertion += "    assert(w === 5.U)\n"
+    assertion += f"    assert(w === {r}.U)\n"
     assertion += "  }\n"
     return assertion
 
@@ -89,10 +92,10 @@ def generate_test(module_name, bound):
 
 
 if __name__ == "__main__":
-    inputs = generate_inputs(5)
+    inputs = generate_inputs(8)
     bound = 200
 
-    for i in range(10, 20):
+    for i in range(20, 30):
         module_name = f"Template{i:02}"
         chisel_code = generate_chisel_code(inputs, module_name)
         with open(f"src/main/scala/template/{module_name}.scala", "w") as f:
@@ -106,6 +109,11 @@ if __name__ == "__main__":
     dir = "src/test/scala/template/"
     files = os.listdir(dir)
     for file in files:
+        # only test files that haven't been tested
+        smtname = f"{bound}-{file[:-6]}.smt2"
+        # if not in test-examples
+        if smtname in os.listdir("test-examples"):
+            continue
         print(file)
         if file.endswith("FormalSpec.scala"):
             print("Running test")
