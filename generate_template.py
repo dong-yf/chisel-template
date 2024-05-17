@@ -17,7 +17,7 @@ def generate_chisel_code(inputs, module_name):
     chisel_code += "  })\n"
 
     chisel_code += "\n"
-    chisel_code += init_registers(200)
+    chisel_code += init_registers(registers, 200)
     chisel_code += add_conditional_logic(inputs)
     chisel_code += "  io.out := w\n"
     chisel_code += "  count := count - 1.U\n"
@@ -27,9 +27,12 @@ def generate_chisel_code(inputs, module_name):
 
     return chisel_code
 
-def init_registers(bound):
+def init_registers(registers, bound):
     # count = reginit(bound)
-    return f"  val w = RegInit(0.U(8.W))\n  val count = RegInit({bound}.U(32.W))\n"
+    init_code = f"  val w = RegInit(0.U(8.W))\n  val count = RegInit({bound}.U(32.W))\n"
+    for reg in registers:
+        init_code += f"  val {reg} = RegInit(0.U(8.W))\n"
+    return init_code
 
 def add_conditional_logic(inputs):
     conditional_logic = ""
@@ -50,20 +53,32 @@ def add_when(inputs):
     return when_code
 
 def add_statement():
+    stmt = ""
     r1 = random.randint(0, 2)
     r2 = random.randint(1, 10)
     if r1 == 0:
-        return f"     w := w + {r2}.U\n"
+        stmt += f"     w := w + {r2}.U\n"
     elif r1 == 1:
-        return f"     w := w - {r2}.U\n"
+        stmt += f"     w := w - {r2}.U\n"
     else:
-        return f"     w := {r2}.U\n"
+        stmt += f"     w := {r2}.U\n"
+    for reg in registers:
+        r1 = random.randint(0, 2)
+        r2 = random.randint(1, 10)
+        if r1 == 0:
+            stmt += f"     {reg} := {reg} + {r2}.U\n"
+        elif r1 == 1:
+            stmt += f"     {reg} := {reg} - {r2}.U\n"
+        else:
+            stmt += f"     {reg} := {r2}.U\n"
+    return stmt
 
 def add_assertion():
-    r = random.randint(1, 10)
+    n = len(registers)
+    r = random.randint(0, n-1)
     assertion = ""
     assertion += "  when (count === 0.U) {\n"
-    assertion += f"    assert(w === {r}.U)\n"
+    assertion += f"    assert(w === reg{r})\n"
     assertion += "  }\n"
     return assertion
 
@@ -72,6 +87,12 @@ def generate_inputs(n):
     for i in range(n):
         inputs.append(f"input{i}")
     return inputs
+
+def generate_registers(n):
+    registers = []
+    for i in range(n):
+        registers.append(f"reg{i}")
+    return registers
 
 def generate_test(module_name, bound):
     test_code = f"package template\n"
@@ -93,9 +114,10 @@ def generate_test(module_name, bound):
 
 if __name__ == "__main__":
     inputs = generate_inputs(8)
+    registers = generate_registers(3)
     bound = 200
 
-    for i in range(20, 30):
+    for i in range(30, 40):
         module_name = f"Template{i:02}"
         chisel_code = generate_chisel_code(inputs, module_name)
         with open(f"src/main/scala/template/{module_name}.scala", "w") as f:

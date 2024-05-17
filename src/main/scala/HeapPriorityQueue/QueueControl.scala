@@ -305,4 +305,10 @@ class QueueControl(implicit parameters: PriorityQueueParameters) extends Module 
       }
     }
   }
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when(count === 10.U) {
+    assert(errorReg === false.B)
+  }
 }

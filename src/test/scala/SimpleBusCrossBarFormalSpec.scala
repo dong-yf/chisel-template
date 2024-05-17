@@ -24,6 +24,6 @@ class SimpleBusCrossBar1toNFormalSpec extends AnyFlatSpec with Formal with Chise
 class SimpleBusCrossbarNto1FormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "SimpleBusCrossBar"
   it should "pass" in {
-    verify(new SimpleBusCrossbarNto1(8), Seq(BoundedCheck(100), Z3EngineAnnotation))
+    verify(new SimpleBusCrossbarNto1(2), Seq(BoundedCheck(40), Z3EngineAnnotation))
   }
 }

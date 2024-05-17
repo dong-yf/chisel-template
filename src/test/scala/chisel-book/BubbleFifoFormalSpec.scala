@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class BubbleFifoFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "BubbleFifo"
   it should "pass" in {
-    verify(new BubbleFifo(16, 100), Seq(BoundedCheck(120), Z3EngineAnnotation))
+    verify(new BubbleFifo(16, 150), Seq(BoundedCheck(160), Z3EngineAnnotation))
   }
 }

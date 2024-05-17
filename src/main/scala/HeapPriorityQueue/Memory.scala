@@ -105,4 +105,11 @@ class linearSearchMem(capacity: Int)(implicit parameters: PriorityQueueParameter
       }
     }
   }
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when(count === 30.U) {
+    assert(errorFlag === false.B)
+  }
+
 }

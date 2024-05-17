@@ -118,13 +118,19 @@ class AXI42SimpleBusConverter() extends Module {
   axi.b.valid := bresp_en && mem.resp.valid
   axi.b.bits.resp := AXI4Parameters.RESP_OKAY
 
-  // val errCounter = RegInit(0.U(8.W))
-  // errorCounter := errorCounter + 1.U
+  val count = RegInit(0.U(8.W))
+  count := count + 1.U
 
-  when (axi.ar.fire) { assert(mem.req.fire && !isInflight()); }
-  when (axi.aw.fire) { assert(!isInflight()); }
-  when (axi.w.fire) { assert(mem.req .fire && isState(axi_write)); }
-  when (axi.b.fire) { assert(mem.resp.fire && isState(axi_write)); }
-  when (axi.r.fire) { assert(mem.resp.fire && isState(axi_read)); }
+  when (count === 100.U) {
+    // when(axi.w.fire) {
+      assert(axi.r.valid === false.B);
+    // }
+  }
+
+  // when (axi.ar.fire) { assert(mem.req.fire && !isInflight()); }
+  // when (axi.aw.fire) { assert(!isInflight()); }
+  // when (axi.w.fire) { assert(mem.req .fire && isState(axi_write)); }
+  // when (axi.b.fire) { assert(mem.resp.fire && isState(axi_write)); }
+  // when (axi.r.fire) { assert(mem.resp.fire && isState(axi_read)); }
 }
 

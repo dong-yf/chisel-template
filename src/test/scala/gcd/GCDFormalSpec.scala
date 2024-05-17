@@ -8,7 +8,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 class GCDFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
     behavior of "GCD"
     it should "pass" in {
-        verify(new GCD(), Seq(BoundedCheck(5), Z3EngineAnnotation))
+        verify(new GCD(), Seq(BoundedCheck(80), Z3EngineAnnotation))
     }
 }
 

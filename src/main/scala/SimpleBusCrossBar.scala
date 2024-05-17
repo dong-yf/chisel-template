@@ -100,7 +100,7 @@ class SimpleBusCrossbarNto1(n: Int, userBits:Int = 0) extends Module {
   // assertion begin
   val count = RegInit(0.U(32.W))
   count := count + 1.U
-  when (count === 100.U) {
-    assert(io.out.resp.valid === true.B)
+  when (count === 40.U) {
+    assert(io.out.resp.ready === true.B)
   }
 }

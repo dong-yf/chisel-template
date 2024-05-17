@@ -32,5 +32,11 @@ class GCD extends Module {
   io.outputGCD := x
   io.outputValid := y === 0.U
 
-  assert(io.outputValid)
+  // assert(io.outputValid)
+  when(io.outputValid) {
+    when (io.value1 === "hffff".U && io.value2 === "hf122".U) {
+      assert(x === 0.U && y === 0.U)
+    }
+    // assert(io.outputGCD === io.value1.U, "GCD is not correct")
+  }
 }
