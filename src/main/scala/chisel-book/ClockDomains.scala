@@ -48,7 +48,9 @@ class SinkClock extends Module {
 
   io.errorCnt := errCntReg
   // assertion begin
-  when (expectedCntReg === 100.U) {
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when (count === 100.U) {
     assert(expectedCntReg === errCntReg)
   }
 }

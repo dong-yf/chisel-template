@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class DebounceFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "Debounce"
   it should "pass" in {
-    verify(new Debounce(), Seq(BoundedCheck(100), Z3EngineAnnotation))
+    verify(new Debounce(), Seq(BoundedCheck(200), Z3EngineAnnotation))
   }
 }

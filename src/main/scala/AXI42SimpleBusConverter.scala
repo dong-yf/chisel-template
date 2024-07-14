@@ -103,7 +103,7 @@ class AXI42SimpleBusConverter() extends Module {
 
   when (axi.b.fire) {
     bresp_en := false.B
-    // resetState()
+    resetState()
   }
 
   // Arbitration
@@ -123,7 +123,7 @@ class AXI42SimpleBusConverter() extends Module {
 
   when (count === 100.U) {
     // when(axi.w.fire) {
-      assert(axi.r.valid === false.B);
+      assert(axi.b.valid === false.B);
     // }
   }
 

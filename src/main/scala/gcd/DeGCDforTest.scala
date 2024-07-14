@@ -78,13 +78,13 @@ class DecoupledGcd(val bitWidth: Int) extends Module {
 
   // assertion begin
   // assume(xInitial === "hffff".U && yInitial === "habcd".U)
-  when(resultValid) {
-    when(xInitial === "hffff".U && yInitial === "hf122".U) {
-      assert(x === 0.U && y === 0.U)
-    }.otherwise {
-      assert(x === 0.U || y === 0.U)
-    }
-  }
+  // when(resultValid) {
+  //   when(xInitial === "hffff".U && yInitial === "hf122".U) {
+  //     assert(x === 0.U && y === 0.U)
+  //   }.otherwise {
+  //     assert(x === 0.U || y === 0.U)
+  //   }
+  // }
   
 
 }

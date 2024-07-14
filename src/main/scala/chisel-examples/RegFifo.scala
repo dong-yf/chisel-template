@@ -44,4 +44,11 @@ class RegFifo[T <: Data](gen: T, depth: Int) extends Fifo(gen: T, depth: Int) {
   io.deq.bits := memReg(readPtr)
   io.enq.ready := !fullReg
   io.deq.valid := !emptyReg
+
+  // assertion begin
+  val count = RegInit(80.U(8.W))
+  count := count - 1.U
+  when (count === 0.U) {
+    assert(emptyReg === incrRead)
+  }
 }

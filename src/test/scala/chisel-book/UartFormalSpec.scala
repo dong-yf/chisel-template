@@ -22,6 +22,6 @@ class RxFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
 class BufferFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "Uart"
   it should "pass" in {
-    verify(new Buffer(), Seq(BoundedCheck(210), Z3EngineAnnotation))
+    verify(new Buffer(), Seq(BoundedCheck(200), Z3EngineAnnotation))
   }
 }

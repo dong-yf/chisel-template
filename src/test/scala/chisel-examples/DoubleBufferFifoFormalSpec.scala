@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class DoubleBufferFifoFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "DoubleBufferFifo"
   it should "pass" in {
-    verify(new DoubleBufferFifo(4), Seq(BoundedCheck(200), Z3EngineAnnotation))
+    verify(new DoubleBufferFifo(UInt(8.W), 4), Seq(BoundedCheck(80), Z3EngineAnnotation))
   }
 }

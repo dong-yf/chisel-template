@@ -84,4 +84,11 @@ class MemFifo[T <: Data](gen: T, depth: Int) extends Fifo(gen: T, depth: Int) {
   io.deq.bits :=  Mux(stateReg === valid, data, shadowReg)
   io.enq.ready := !fullReg
   io.deq.valid := stateReg === valid || stateReg === full
+
+  // assertion begin
+  val count = RegInit(200.U(8.W))
+  count := count - 1.U
+  when (count === 0.U) {
+    assert(stateReg === valid)
+  }
 }

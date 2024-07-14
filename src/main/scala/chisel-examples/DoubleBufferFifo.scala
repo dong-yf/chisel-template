@@ -52,12 +52,10 @@ class DoubleBufferFifo[T <: Data](gen: T, depth: Int) extends Fifo(gen: T, depth
     io.deq.bits := dataReg
 
     // assertion begin
-    val count = RegInit(0.U)
-    when (io.enq.valid && io.enq.ready) {
-      count := count + 1.U
-    }
-    when (io.deq.valid && io.deq.ready) {
-      count := count - 1.U
+    val count = RegInit(80.U(8.W))
+    count := count - 1.U
+    when (count === 0.U) {
+      assert(stateReg === one)
     }
   }
 

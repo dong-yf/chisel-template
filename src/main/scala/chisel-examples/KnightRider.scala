@@ -52,8 +52,15 @@ class KnightRider(resetSignal: Bool = null, frequ: Int)
   }
 
   io.led := ledReg
-}
 
+  // assertion begin
+  val count = RegInit(50.U(8.W))
+  count := count - 1.U
+  when (count === 0.U) {
+    assert(ledReg === 2.U)
+  }
+
+}
 /**
  * Generate a 6 Hz tick to drive the FSM.
  */

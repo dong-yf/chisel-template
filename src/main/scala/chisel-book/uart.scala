@@ -164,7 +164,7 @@ class Buffer extends Module {
   val count = RegInit(0.U(32.W))
   count := count + 1.U
   when (count === 200.U) {
-    assert(io.in.ready)
+    assert(stateReg === full)
   }
 }
 //- end

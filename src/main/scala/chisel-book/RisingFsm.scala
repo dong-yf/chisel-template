@@ -1,3 +1,5 @@
+package chiselbook
+
 //- start rising_fsm
 import chisel3._
 import chisel3.util._
@@ -33,6 +35,13 @@ class RisingFsm extends Module {
         stateReg := zero
       }
     }
+  }
+
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when (count === 300.U) {
+    assert(io.risingEdge)
   }
 }
 //- end

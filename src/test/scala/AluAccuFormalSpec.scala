@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class AluAccuFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "AluAccu"
   it should "pass" in {
-    verify(new AluAccu(32), Seq(BoundedCheck(10), Z3EngineAnnotation))
+    verify(new AluAccu(32), Seq(BoundedCheck(100), Z3EngineAnnotation))
   }
 }

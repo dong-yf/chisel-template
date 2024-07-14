@@ -53,6 +53,6 @@ class ShiftRegister extends Module {
   val count = RegInit(0.U(32.W))
   count := count + 1.U
   when (count === 200.U) {
-    assert(io.serOut === 1.U)
+    assert(loadReg === 0.U)
   }
 }

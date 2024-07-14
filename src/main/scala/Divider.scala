@@ -3,7 +3,7 @@ package example.xiangshan
 import chisel3._
 import chisel3.util._
 
-class Divider(len: Int = 8) extends Module {
+class Divider(len: Int = 4) extends Module {
   val io = IO(new Bundle { // 1
     val in = Flipped(new Bundle {
       val ready = Input(Bool())
@@ -81,7 +81,7 @@ class Divider(len: Int = 8) extends Module {
     val R = io.out.bits(len * 2 - 1, len)
     val Q = io.out.bits(len - 1, 0)
 
-    when (atmpReg === "hff".U && btmpReg === "h2".U) {
+    when (atmpReg === "hf".U && btmpReg === "h2".U) {
       assert(atmpReg === btmpReg * Q + R + 1.U)
     }
     .otherwise {

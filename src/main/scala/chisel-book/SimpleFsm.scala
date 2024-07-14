@@ -1,3 +1,5 @@
+package chiselbook
+
 //- start simple_fsm
 import chisel3._
 import chisel3.util._
@@ -39,6 +41,13 @@ class SimpleFsm extends Module {
   }
   // Output logic
   io.ringBell := stateReg === red
+  
+  // assertion begin
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+  when (count === 100.U) {
+    assert(io.ringBell)
+  }
 }
 //- end
 

@@ -93,7 +93,7 @@ class AluAccu(size: Int) extends Module {
   val count = RegInit(0.U(32.W))
   count := count + 1.U
 
-  when (count === 8.U) {
+  when (count === 100.U) {
     assert(accuReg === 2.U)
   }
 

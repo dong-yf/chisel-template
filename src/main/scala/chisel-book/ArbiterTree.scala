@@ -59,10 +59,20 @@ class ArbiterTree[T <: Data: Manifest](n: Int, private val gen: T) extends Arbit
         }
       }
     }
+    // assertion begin
+    when (count === 30.U) {
+      assert(regState === hasA || regState === hasB)
+    }
+    // assertion end
+
     out.bits := regData
     out
   }
   //- end
+
+  val count = RegInit(0.U(32.W))
+  count := count + 1.U
+
   io.out <> io.in.reduceTree((a, b) => arbitrateFair(a, b))
 }
 

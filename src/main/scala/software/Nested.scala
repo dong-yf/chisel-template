@@ -29,17 +29,18 @@ class Nested extends Module {
     val k = RegInit(0.U(32.W))
     val i = RegInit(0.U(32.W))
     val j = RegInit(0.U(32.W))
-    val count = RegInit(110.U(32.W))
+    val count = RegInit(50.U(32.W))
 
     when (i < io.n) {
         when (j < io.m) {
             k := k + 1.U
             j := j + 1.U
+            count := count - 1.U
         }.otherwise {
             i := i + 1.U
             j := 0.U
         }
-        count := count - 1.U
+        // count := count - 1.U
     }
 
     when(count === 0.U) {

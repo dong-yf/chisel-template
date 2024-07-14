@@ -11,3 +11,10 @@ class MulFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
         verify(new Mul(8), Seq(BoundedCheck(20), Z3EngineAnnotation))
     }
 }
+
+object emitMulFIRRTL extends App {
+    (new chisel3.stage.ChiselStage()).emitFirrtl(
+        new Mul(8),
+        Array("--target-dir", "generated")
+    )
+}
