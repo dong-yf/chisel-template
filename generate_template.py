@@ -29,9 +29,11 @@ def generate_chisel_code(inputs, module_name):
 
 def init_registers(registers, bound):
     # count = reginit(bound)
-    init_code = f"  val w = RegInit(0.U(8.W))\n  val count = RegInit({bound}.U(32.W))\n"
+    r = random.randint(0, 10)
+    init_code = f"  val w = RegInit({r}.U(8.W))\n  val count = RegInit({bound}.U(32.W))\n"
     for reg in registers:
-        init_code += f"  val {reg} = RegInit(0.U(8.W))\n"
+        r_init = random.randint(0, 10)
+        init_code += f"  val {reg} = RegInit({r_init}.U(8.W))\n"
     return init_code
 
 def add_conditional_logic(inputs):
@@ -113,11 +115,11 @@ def generate_test(module_name, bound):
 
 
 if __name__ == "__main__":
-    inputs = generate_inputs(8)
+    inputs = generate_inputs(5)
     registers = generate_registers(3)
     bound = 200
 
-    for i in range(30, 40):
+    for i in range(120, 140):
         module_name = f"Template{i:02}"
         chisel_code = generate_chisel_code(inputs, module_name)
         with open(f"src/main/scala/template/{module_name}.scala", "w") as f:
