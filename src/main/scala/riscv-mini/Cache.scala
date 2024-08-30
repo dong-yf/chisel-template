@@ -222,4 +222,18 @@ class Cache(val p: CacheConfig, val nasti: NastiBundleParameters, val xlen: Int)
       }
     }
   }
+
+  // __DYF_ADD_BEGIN__
+  // add an assertion   ---  E5
+  // when(state === sWriteCache) {
+  //   assert(!io.cpu.abort, "Write cache state should not be aborted")
+  // }
+
+  // add an assertion   ---  E6
+  // when(state === CacheState.sReadCache && hit) {
+  //   assert(io.cpu.resp.valid, "Cache Read: CPU response should be valid when a hit occurs")
+  // }
+
+  // add an assertion   ---  E7
+  assert(io.cpu.resp.valid && hit)
 }

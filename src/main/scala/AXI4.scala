@@ -1,8 +1,8 @@
-package bus.axi4
+package ns.bus.axi4
 
 import chisel3._
 import chisel3.util._
-import bus.simplebus.HasNutCoreParameter
+import ns.bus.simplebus.HasNutCoreParameter
 
 object AXI4Parameters extends HasNutCoreParameter {
   // These are all fixed by the AXI4 standard:

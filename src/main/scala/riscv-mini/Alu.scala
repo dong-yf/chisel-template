@@ -98,4 +98,11 @@ class AluArea(val width: Int) extends Alu {
 
   io.out := out
   io.sum := sum
+
+  // __DYF_ADD_BEGIN__
+  // add an assertion    ----     E2
+  // when(io.alu_op === ALU_SUB) {
+  // // 检查 sum 的最高位是否正确，即 31 位加法结果的符号位处理是否正确
+  //   assert(io.out === sum || io.out === Cat(0.U(1.W), sum(30, 0)), "ALU_SUB: Incorrect sum calculation!")
+  // }
 }

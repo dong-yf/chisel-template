@@ -215,4 +215,8 @@ class Datapath(val conf: CoreConfig) extends Module {
 //      Mux(regFile.io.wen, regFile.io.wdata, 0.U)
 //    )
 //  }
+
+  // __DYF_ADD_BEGIN__
+  // add an assertion     ----     E4
+  // assert(!(ld_type === LD_LB && lshift(7, 0).asSInt < 0.S && load(7, 0) === lshift(7, 0).zext.asUInt))
 }

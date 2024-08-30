@@ -1,4 +1,4 @@
-package bus.simplebus
+package ns.bus.simplebus
 
 import chisel3._
 import chisel3.util._

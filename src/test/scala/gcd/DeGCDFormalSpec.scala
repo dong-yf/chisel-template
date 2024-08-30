@@ -15,7 +15,7 @@ class DecoupledGcdProp1(bitWidth: Int) extends DecoupledGcd(bitWidth){
   }
 }
 
-class DecoupledGcdSpec extends AnyFlatSpec with ChiselScalatestTester with Formal {
+class DeGCDFormalSpec extends AnyFlatSpec with ChiselScalatestTester with Formal {
   // println(new (chisel3.stage.ChiselStage).emitSystemVerilog(new DecoupledGcdProp1(4)))
   behavior of "DecoupledGcd"
   it should "pass" in {

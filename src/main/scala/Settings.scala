@@ -1,4 +1,4 @@
-package top
+package ns.top
 
 object DefaultSettings {
   def apply() = Map(

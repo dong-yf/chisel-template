@@ -137,8 +137,8 @@ class Div(
   val regin1 = RegInit(0.U(w.W))
   val regin2 = RegInit(0.U(w.W))
   when(io.req.ready && io.req.valid) {
-    assume(io.req.bits.fn === 4.U)
-    assume(io.req.bits.dw === 1.U)
+    // assume(io.req.bits.fn === 4.U)
+    // assume(io.req.bits.dw === 1.U)
     regin1 := io.req.bits.in1
     regin2 := io.req.bits.in2
   }

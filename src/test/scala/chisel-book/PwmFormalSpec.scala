@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class PwmFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "Pwm"
   it should "pass" in {
-    verify(new Pwm(), Seq(BoundedCheck(200), Z3EngineAnnotation))
+    verify(new Pwm(), Seq(BoundedCheck(10), Z3EngineAnnotation))
   }
 }

@@ -86,9 +86,11 @@ class MemFifo[T <: Data](gen: T, depth: Int) extends Fifo(gen: T, depth: Int) {
   io.deq.valid := stateReg === valid || stateReg === full
 
   // assertion begin
-  val count = RegInit(200.U(8.W))
+  val count = RegInit(100.U(8.W))
   count := count - 1.U
   when (count === 0.U) {
-    assert(stateReg === valid)
+    // assert(stateReg === valid)
+    assert(stateReg === valid && fullReg === true.B)
   }
+
 }

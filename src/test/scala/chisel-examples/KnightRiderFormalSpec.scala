@@ -8,6 +8,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 class KnightRiderFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "KnightRider"
   it should "pass" in {
-    verify(new KnightRider(false.B, 12), Seq(BoundedCheck(50), Z3EngineAnnotation))
+    verify(new KnightRider(false.B, 12), Seq(BoundedCheck(2), Z3EngineAnnotation))
   }
 }

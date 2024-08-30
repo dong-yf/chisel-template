@@ -464,8 +464,15 @@ sealed class CacheStage3(implicit val cacheConfig: CacheConfig) extends CacheMod
   // assert(!(metaHitWriteBus.req.valid && metaRefillWriteBus.req.valid))
   // assert(!(dataHitWriteBus.req.valid && dataRefillWriteBus.req.valid))
   // assert(!(!ro.B && io.flush), "only allow to flush icache")
+
+  // val count = RegInit(0.U(32.W))
+  // count := count + 1.U
   
-  
+  // when (count === 100.U) {
+  //   assert(!(metaHitWriteBus.req.valid && metaRefillWriteBus.req.valid))
+  // }
+
+  // assert(io.cohResp.valid && io.cohResp.bits.rdata === dataHitWay, "dataHitWay error")
 }
 
 class Cache(implicit val cacheConfig: CacheConfig) extends CacheModule with HasCacheIO {

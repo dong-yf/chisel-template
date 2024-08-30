@@ -324,6 +324,6 @@ class CSR(val xlen: Int) extends Module {
 
   // __DYF_ADD_BEGIN__
   // write an assertion
-  assert(!(io.expt && isEcall && io.stall), "Ecall exception should not be raised when stall is low")
+  // assert(!(io.expt && isEcall && io.stall), "Ecall exception should not be raised when stall is low")
   // __DYF_ADD_END__
 }

@@ -70,8 +70,8 @@ class Arbiter[T <: Data: Manifest](n: Int, private val gen: T) extends Module {
       }
     }
     // assertion begin
-    when(count === 30.U) {
-      assert(regState === idleA)
+    when(count === 40.U) {
+      assert(regState === out.valid)
     }
 
     out.bits := regData

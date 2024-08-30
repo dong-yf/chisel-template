@@ -164,4 +164,12 @@ class Control extends Module {
   io.wb_en := ctrlSignals(10).asBool
   io.csr_cmd := ctrlSignals(11)
   io.illegal := ctrlSignals(12)
+
+  // __DYF_ADD_BEGIN__
+  // add an assertion    ----    E1
+  // assert(!io.inst_kill || io.pc_sel === Control.PC_4, "inst_kill should only be true when pc_sel is PC_4")
+
+  // Assertion: If the instruction is BNE, br_type should not be BR_EQ    ----    E3  
+  // val BNE = "b000000000001_00000_000_00000_1100011".U
+  // assert(!(io.inst === BNE && io.br_type === Control.BR_EQ), "Error: BNE instruction should not use BR_EQ")
 }

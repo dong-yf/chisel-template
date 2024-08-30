@@ -20,7 +20,7 @@ class Pwm extends Module {
   //- end
 
   //- start pwm_modulate
-  val FREQ = 1000 // a 100 MHz clock input
+  val FREQ = 100 // a 100 MHz clock input
   val MAX = FREQ/10  // 1 kHz
 
   val modulationReg = RegInit(0.U(32.W))
@@ -45,11 +45,12 @@ class Pwm extends Module {
   io.led := Cat(0.U, sig, dout)
 
   // assertion begin
-  val count = RegInit(0.U(32.W))
-  count := count + 1.U
-  when (count === 200.U) {
-    assert(sig === 1.U)
-  }
+  assert(sig === 1.U)
+  // val count = RegInit(0.U(32.W))
+  // count := count + 1.U
+  // when (count === 200.U) {
+  //   assert(sig === 1.U)
+  // }
 }
 
 // object Pwm extends App {

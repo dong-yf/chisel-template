@@ -7,7 +7,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 import examples.heappriorityqueue._
 import chisel3.util.log2Ceil
 
-class MemoryFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
+class LinearSearchMemFormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
   behavior of "LinearSearchMem"
   it should "pass" in {
     val size = 11

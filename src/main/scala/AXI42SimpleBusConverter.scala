@@ -1,7 +1,7 @@
-package bus
+package ns.bus
 
-import bus.axi4._
-import bus.simplebus._
+import ns.bus.axi4._
+import ns.bus.simplebus._
 
 import chisel3._
 import chisel3.util._

@@ -1,0 +1,13 @@
+package ns.bus.simplebus
+
+import chisel3._
+import chiseltest._
+import chiseltest.formal._
+import org.scalatest.flatspec.AnyFlatSpec
+
+class SimpleBusCrossbarNto1FormalSpec extends AnyFlatSpec with Formal with ChiselScalatestTester {
+  behavior of "SimpleBusCrossBar"
+  it should "pass" in {
+    verify(new SimpleBusCrossbarNto1(2), Seq(BoundedCheck(40), Z3EngineAnnotation))
+  }
+}

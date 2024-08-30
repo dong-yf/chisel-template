@@ -1,4 +1,4 @@
-package bus
+package ns.bus
 
 import chisel3._
 import chiseltest._
